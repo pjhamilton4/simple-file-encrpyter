@@ -3,7 +3,11 @@ package com.philipjhamilton.encrypt;
 import org.junit.Test;
 
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -27,7 +31,13 @@ public class FileEncrypterDecrypterTest {
             assertThat(decryptedOutput, is(originalContent));
 
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
 
